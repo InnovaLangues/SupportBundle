@@ -1,6 +1,6 @@
 {
-    "name" : "innova/path-bundle",
-    "description" : "Claroline Path Bundle",
+    "name" : "innova/support-bundle",
+    "description" : "Claroline Support Bundle",
     "type" : "claroline-plugin",
     "authors" : [{
             "name" : "Arnaud Bey",
@@ -14,31 +14,26 @@
         }, {
             "name" : "Donovan Tengblad",
             "email" : "donovan.tengblad@u-grenoble3.fr"
+        }, {
+            "name" : "Patrick Guillou",
+            "email" : "patrick.guillou@u-grenoble3.fr"
         }
     ],
     "keywords" : [
         "Claroline",
-        "Path"
+        "Support"
     ],
-    "homepage" : "http://github.com/InnovaLangues/PathBundle",
+    "homepage" : "http://github.com/InnovaLangues/SupportBundle",
     "license" : [
         "MIT"
     ],
     "require" : {
-        "claroline/core-bundle" : ">=2.0.5,<3.0",
-        "doctrine/doctrine-fixtures-bundle" : "2.2.0",
-        "innova/angular-js-bundle" : ">=1.0",
-        "innova/angular-ui-bootstrap-bundle" : ">=1.0",
-        "innova/angular-ui-tinymce-bundle" : ">=1.0",
-        "innova/angular-ui-pageslide-bundle" : ">=1.0",
-        "innova/angular-ui-sortable-bundle" : ">=1.0",
-        "innova/angular-ui-translation-bundle" : ">=2.0",
-        "innova/angular-ui-resource-picker-bundle" : ">=1.0,<2.0"
+        "claroline/core-bundle" : ">=2.0.5,<3.0"
     },
     "autoload" : {
         "psr-0" : {
-            "Innova\\PathBundle" : "."
+            "Innova\\SupportBundle" : "."
         }
     },
-    "target-dir" : "Innova/PathBundle"
+    "target-dir" : "Innova/SupportBundle"
 }

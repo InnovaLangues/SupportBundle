@@ -15,6 +15,6 @@ Install with composer :
 
 * Donovan Tengblad (purplefish32)
 * Axel Penin (Elorfin)
-* Arnaud Bay (arnaudbey)
+* Arnaud Bey (arnaudbey)
 * Eric Vincent (ericvincenterv)
 * Patrick Guillou (pitrackster)
