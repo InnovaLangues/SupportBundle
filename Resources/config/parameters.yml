@@ -1,0 +1,6 @@
+parameters:
+    # Controllers
+    innova_support.controller.support.class: Innova\SupportBundle\Controller\SupportController
+
+    # Managers
+    innova_support.manager.support.class: Innova\SupportBundle\Controller\SupportManager

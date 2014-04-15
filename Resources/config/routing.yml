@@ -1,0 +1,4 @@
+innova_support:
+    resource: "@InnovaSupportBundle/Controller/"
+    type:     annotation
+    prefix:   /

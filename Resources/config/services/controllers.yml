@@ -1,0 +1,3 @@
+services:
+    innova_support.controller.support:
+        class: %innova_support.controller.support.class%
