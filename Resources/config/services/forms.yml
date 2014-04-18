@@ -1,0 +1,6 @@
+services:
+    # Support type
+    innova_support.form.type.support:
+        class:  %innova_support.form.type.support.class%
+        tags:
+          - { name: form.type, alias: innova_support }

@@ -1,3 +1,12 @@
 services:
     innova_support.controller.support:
         class: %innova_support.controller.support.class%
+        arguments:
+            formFactory:     @form.factory
+            securityContext: @security.context
+            translator:      @translator
+            configHandler:   @claroline.config.platform_config_handler
+            supportManager:  @innova_support.manager.support
+        calls:
+            - [setRequest, [@request]]
+        scope: request

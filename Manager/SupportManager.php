@@ -1,45 +1,42 @@
 <?php
 namespace Innova\SupportBundle\Manager;
 
-use Symfony\Component\Security\Core\SecurityContextInterface;
-
 class SupportManager
 {
     /**
-     * Current security context
-     * @var \Symfony\Component\Security\Core\SecurityContextInterface
-     */
-    protected $security;
-
-    /**
-     * @var
+     * Mailer service
+     * @var \Swift_Mailer
      */
     protected $mailer;
 
     /**
      * Class constructor
-     * @param \Symfony\Component\Security\Core\SecurityContextInterface $securityContext
+     * @param \Swift_Mailer $mailer
      */
     public function __construct(
-        SecurityContextInterface $securityContext,
         \Swift_Mailer $mailer)
     {
-        $this->security = $securityContext;
         $this->mailer = $mailer;
     }
 
     /**
      * Send a new message to support team (it will never happen because we don't code bugs!)
-     * @param $message string
+     * @param $supportEmail string
+     * @param $userEmail    string
+     * @param $subject      string
+     * @param $content      string
      */
-    public function sendRequest($message)
+    public function sendRequest($supportEmail, $userEmail, $subject, $content)
     {
-        /*$message = \Swift_Message::newInstance()
-            ->setSubject('Hello Email')
-            ->setFrom('send@example.com')
-            ->setTo('recipient@example.com')
-            ->setBody($this->renderView('HelloBundle:Hello:email.txt.twig', array('name' => $name)))
+        // Create message to send
+        $message = \Swift_Message::newInstance();
+        $message->setSubject($subject)
+                ->setFrom($userEmail)
+                ->setTo($supportEmail)
+                ->setBody($content)
         ;
-        $this->mailer->send($message);*/
+
+        // Send mail
+        $this->mailer->send($message);
     }
 }

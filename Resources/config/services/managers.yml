@@ -3,5 +3,4 @@ services:
     innova_support.manager.support:
         class: %innova_support.manager.support.class%
         arguments:
-            securityContext: @security.context
-            mailer:          @mailer
+            mailer: @mailer

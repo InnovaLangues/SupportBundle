@@ -3,4 +3,7 @@ parameters:
     innova_support.controller.support.class: Innova\SupportBundle\Controller\SupportController
 
     # Managers
-    innova_support.manager.support.class: Innova\SupportBundle\Controller\SupportManager
+    innova_support.manager.support.class: Innova\SupportBundle\Manager\SupportManager
+
+    # Forms
+    innova_support.form.type.support.class: Innova\SupportBundle\Form\SupportType

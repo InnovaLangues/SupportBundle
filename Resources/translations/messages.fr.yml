@@ -1,0 +1,5 @@
+innova_support_userEmail: Email
+innova_support_subject: Sujet
+innova_support_content: Message
+
+no_support_email: L'email du support n'a pas été défini dans la plateforme. Nous sommes dans l'impossibilité de transmettre votre requête.

@@ -1,0 +1,5 @@
+innova_support_userEmail: Email
+innova_support_subject: Subject
+innova_support_content: Message
+
+no_support_email: Support email is defined for the platform. We are unable to send your request.

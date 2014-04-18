@@ -22,7 +22,7 @@ class InnovaSupportBundle extends PluginBundle implements AutoConfigurableInterf
     {
         $config = new ConfigurationBuilder();
 
-        return $config->addRoutingResource(__DIR__ . '/Resources/config/routing.yml', null, 'innova_support');
+        return $config->addRoutingResource(__DIR__ . '/Resources/config/routing.yml');
     }
 
     public function hasMigrations()

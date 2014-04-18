@@ -30,6 +30,7 @@ class InnovaSupportExtension extends Extension
 
         $loader->load('controllers.yml');
         $loader->load('managers.yml');
+        $loader->load('forms.yml');
         
         return $this;
     }

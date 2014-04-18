@@ -1,0 +1,31 @@
+{% extends 'ClarolineCoreBundle::layout.html.twig' %}
+
+{% block breadcrumb %}
+    <div>
+        <ul class="breadcrumb">
+            <li><a href="{{ path('innova_support_new') }}"><i class="icon-bug"></i> {{ 'support'|trans({}, 'platform') }}</a></li>
+            <li class="active">{{ 'bug_request'|trans({}, 'platform') }}</li>
+        </ul>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">{{ 'bug_request'|trans({}, 'platform') }}</h3>
+        </div>
+
+        <form class="form-horizontal" action="{{path('innova_support_send')}}" method="post" {{ form_enctype(form) }}>
+            <div class="panel-body">
+                {{ form_widget(form) }}
+            </div>
+
+            <div class="panel-footer">
+                <button type="submit" class="btn btn-primary">{{ 'ok'|trans({}, 'platform') }}</button>
+                <a href="#">
+                    <button type="button" class="btn btn-default">{{ 'cancel'|trans({}, 'platform') }}</button>
+                </a>
+            </div>
+        </form>
+    </div>
+{% endblock %}
