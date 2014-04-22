@@ -3,7 +3,9 @@ services:
         class: %innova_support.controller.support.class%
         arguments:
             formFactory:     @form.factory
+            session:         @session
             securityContext: @security.context
+            router:          @router
             translator:      @translator
             configHandler:   @claroline.config.platform_config_handler
             supportManager:  @innova_support.manager.support

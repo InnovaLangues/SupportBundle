@@ -1,6 +1,9 @@
 <?php
 namespace Innova\SupportBundle\Manager;
 
+/**
+ * Class SupportManager
+ */
 class SupportManager
 {
     /**
@@ -21,10 +24,10 @@ class SupportManager
 
     /**
      * Send a new message to support team (it will never happen because we don't code bugs!)
-     * @param $supportEmail string
-     * @param $userEmail    string
-     * @param $subject      string
-     * @param $content      string
+     * @param string $supportEmail
+     * @param string $userEmail
+     * @param string $subject
+     * @param string $content
      */
     public function sendRequest($supportEmail, $userEmail, $subject, $content)
     {

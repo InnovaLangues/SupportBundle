@@ -7,8 +7,11 @@ use Innova\SupportBundle\Manager\SupportManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Translation\TranslatorInterface;
@@ -34,15 +37,28 @@ use Symfony\Component\Translation\TranslatorInterface;
 class SupportController
 {
     /**
+     * Form factory
      * @var \Symfony\Component\Form\FormFactoryInterface
      */
     private $formFactory;
+
+    /**
+     * Current session
+     * @var \Symfony\Component\HttpFoundation\Session\SessionInterface
+     */
+    private $session;
 
     /**
      * Current security context
      * @var SecurityContextInterface|\Symfony\Component\Security\Core\SecurityContextInterface
      */
     private $security;
+
+    /**
+     * Router
+     * @var \Symfony\Component\Routing\RouterInterface
+     */
+    private $router;
 
     /**
      * Translator service
@@ -69,21 +85,28 @@ class SupportController
 
     /**
      * Class constructor
-     * @param \Symfony\Component\Form\FormFactoryInterface                             $formFactory
-     * @param \Symfony\Component\Security\Core\SecurityContextInterface                $securityContext
+     * @param \Symfony\Component\Form\FormFactoryInterface $formFactory
+     * @param \Symfony\Component\HttpFoundation\Session\SessionInterface $session
+     * @param \Symfony\Component\Security\Core\SecurityContextInterface $securityContext
+     * @param \Symfony\Component\Routing\RouterInterface $router
+     * @param \Symfony\Component\Translation\TranslatorInterface $translator
      * @param \Claroline\CoreBundle\Library\Configuration\PlatformConfigurationHandler $configHandler
-     * @param \Innova\SupportBundle\Manager\SupportManager                             $supportManager
+     * @param \Innova\SupportBundle\Manager\SupportManager $supportManager
      */
     public function __construct(
         FormFactoryInterface         $formFactory,
+        SessionInterface             $session,
         SecurityContextInterface     $securityContext,
+        RouterInterface              $router,
         TranslatorInterface          $translator,
         PlatformConfigurationHandler $configHandler,
         SupportManager               $supportManager)
     {
         $this->formFactory    = $formFactory;
+        $this->session        = $session;
         $this->security       = $securityContext;
-        $this->translator = $translator;
+        $this->router         = $router;
+        $this->translator     = $translator;
         $this->configHandler  = $configHandler;
         $this->supportManager = $supportManager;
     }
@@ -143,8 +166,26 @@ class SupportController
                 $subject = $form->get('subject')->getData();
                 $content = $form->get('content')->getData();
 
-                // Send support request
-                $this->supportManager->sendRequest($supportEmail, $userEmail, $subject, $content);
+                try {
+                    // Send support request
+                    $this->supportManager->sendRequest($supportEmail, $userEmail, $subject, $content);
+
+                    $this->session->getFlashBag()->add(
+                        'success',
+                        $this->translator->trans('support_send_success', array())
+                    );
+                }
+                catch (\Exception $e) {
+                    $this->session->getFlashBag()->add(
+                        'error',
+                        $this->translator->trans('support_send_error', array())
+                    );
+                }
+
+                // Redirect to form
+                $url = $this->router->generate('innova_support_new');
+
+                return new RedirectResponse($url);
             }
             else {
                 // Display error to user

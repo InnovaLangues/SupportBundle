@@ -17,6 +17,8 @@
 
         <form class="form-horizontal" action="{{path('innova_support_send')}}" method="post" {{ form_enctype(form) }}>
             <div class="panel-body">
+                <div>{{ macros.flashBox() }}</div>
+
                 {{ form_widget(form) }}
             </div>
 
