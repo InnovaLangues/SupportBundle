@@ -34,6 +34,7 @@ class SupportManager
         // Create message to send
         $message = \Swift_Message::newInstance();
         $message->setSubject($subject)
+		->setContentType('text/html')
                 ->setFrom($userEmail)
                 ->setTo($supportEmail)
                 ->setBody($content)
