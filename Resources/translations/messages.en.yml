@@ -6,3 +6,4 @@ no_support_email: Support email is defined for the platform. We are unable to se
 
 support_send_success: Your request has been sent.
 support_send_error:   Your request can't be sent. Please try again later.
+# support_help:

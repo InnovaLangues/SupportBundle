@@ -6,3 +6,4 @@ no_support_email: L'email du support n'a pas été défini dans la plateforme. N
 
 support_send_success: Votre demande a bien été prise en compte.
 support_send_error:   Votre demande n'a pas pu être prise en compte. Veuillez réessayer plus tard.
+# support_help:

@@ -15,9 +15,14 @@
             <h3 class="panel-title">{{ 'bug_request'|trans({}, 'platform') }}</h3>
         </div>
 
-        <form class="form-horizontal" action="{{path('innova_support_send')}}" method="post" {{ form_enctype(form) }}>
+        <form class="form-horizontal" action="{{ path('innova_support_send') }}" method="post" {{ form_enctype(form) }}>
             <div class="panel-body">
                 <div>{{ macros.flashBox() }}</div>
+
+                <div class="alert alert-info">
+                    <span class="fa fa-info-sign"></span>
+
+                </div>
 
                 {{ form_widget(form) }}
             </div>
