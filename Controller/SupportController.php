@@ -85,13 +85,13 @@ class SupportController
 
     /**
      * Class constructor
-     * @param \Symfony\Component\Form\FormFactoryInterface $formFactory
-     * @param \Symfony\Component\HttpFoundation\Session\SessionInterface $session
-     * @param \Symfony\Component\Security\Core\SecurityContextInterface $securityContext
-     * @param \Symfony\Component\Routing\RouterInterface $router
-     * @param \Symfony\Component\Translation\TranslatorInterface $translator
+     * @param \Symfony\Component\Form\FormFactoryInterface                             $formFactory
+     * @param \Symfony\Component\HttpFoundation\Session\SessionInterface               $session
+     * @param \Symfony\Component\Security\Core\SecurityContextInterface                $securityContext
+     * @param \Symfony\Component\Routing\RouterInterface                               $router
+     * @param \Symfony\Component\Translation\TranslatorInterface                       $translator
      * @param \Claroline\CoreBundle\Library\Configuration\PlatformConfigurationHandler $configHandler
-     * @param \Innova\SupportBundle\Manager\SupportManager $supportManager
+     * @param \Innova\SupportBundle\Manager\SupportManager                             $supportManager
      */
     public function __construct(
         FormFactoryInterface         $formFactory,
@@ -113,7 +113,7 @@ class SupportController
 
     /**
      * Inject current request
-     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param  \Symfony\Component\HttpFoundation\Request          $request
      * @return \Innova\SupportBundle\Controller\SupportController
      */
     public function setRequest(Request $request = null)
@@ -136,7 +136,7 @@ class SupportController
         // Create form
         $form = $this->createFrom();
 
-        return array (
+        return array(
             'form' => $form->createView(),
         );
     }
@@ -174,8 +174,7 @@ class SupportController
                         'success',
                         $this->translator->trans('support_send_success', array())
                     );
-                }
-                catch (\Exception $e) {
+                } catch (\Exception $e) {
                     $this->session->getFlashBag()->add(
                         'error',
                         $this->translator->trans('support_send_error', array())
@@ -186,25 +185,25 @@ class SupportController
                 $url = $this->router->generate('innova_support_new');
 
                 return new RedirectResponse($url);
-            }
-            else {
+            } else {
                 // Display error to user
                 $form->addError(new FormError($this->translator->trans('no_support_email')));
             }
         }
 
-        return array (
+        return array(
             'form' => $form->createView(),
         );
     }
 
     private function createFrom()
     {
-        // Retrieve user
+        // Retrieve user mail, if not anonymous
         $user = $this->security->getToken()->getUser();
+        $mail = method_exists($user, 'getMail') ? $user->getMail() : "";
 
-        $data = array (
-            'userEmail' => $user->getMail(),
+        $data = array(
+            'userEmail' => $mail,
         );
         $form = $this->formFactory->create('innova_support', $data);
 
