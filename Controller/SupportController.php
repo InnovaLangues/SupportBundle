@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\RouterInterface;
-use Symfony\Component\Security\Core\SecurityContextInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Translation\TranslatorInterface;
 
@@ -49,10 +49,10 @@ class SupportController
     private $session;
 
     /**
-     * Current security context
-     * @var SecurityContextInterface|\Symfony\Component\Security\Core\SecurityContextInterface
+     * Security Token
+     * @var \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface $securityToken
      */
-    private $security;
+    protected $securityToken;
 
     /**
      * Router
@@ -87,7 +87,7 @@ class SupportController
      * Class constructor
      * @param \Symfony\Component\Form\FormFactoryInterface $formFactory
      * @param \Symfony\Component\HttpFoundation\Session\SessionInterface $session
-     * @param \Symfony\Component\Security\Core\SecurityContextInterface $securityContext
+     * @param \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface $securityToken
      * @param \Symfony\Component\Routing\RouterInterface $router
      * @param \Symfony\Component\Translation\TranslatorInterface $translator
      * @param \Claroline\CoreBundle\Library\Configuration\PlatformConfigurationHandler $configHandler
@@ -96,7 +96,7 @@ class SupportController
     public function __construct(
         FormFactoryInterface         $formFactory,
         SessionInterface             $session,
-        SecurityContextInterface     $securityContext,
+        TokenStorageInterface        $securityToken,
         RouterInterface              $router,
         TranslatorInterface          $translator,
         PlatformConfigurationHandler $configHandler,
@@ -104,7 +104,7 @@ class SupportController
     {
         $this->formFactory    = $formFactory;
         $this->session        = $session;
-        $this->security       = $securityContext;
+        $this->securityToken  = $securityToken;
         $this->router         = $router;
         $this->translator     = $translator;
         $this->configHandler  = $configHandler;
@@ -201,7 +201,7 @@ class SupportController
     private function createFrom()
     {
         // Retrieve user
-        $user = $this->security->getToken()->getUser();
+        $user = $this->securityToken->getToken()->getUser();
 
         $data = array (
             'userEmail' => $user->getMail(),
