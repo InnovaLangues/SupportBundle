@@ -200,11 +200,12 @@ class SupportController
 
     private function createFrom()
     {
-        // Retrieve user
+        // Retrieve user mail, if not anonymous
         $user = $this->securityToken->getToken()->getUser();
+        $mail = method_exists($user, 'getMail') ? $user->getMail() : "";
 
-        $data = array (
-            'userEmail' => $user->getMail(),
+        $data = array(
+            'userEmail' => $mail,
         );
         $form = $this->formFactory->create('innova_support', $data);
 
